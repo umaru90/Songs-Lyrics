@@ -18,17 +18,17 @@ def sing_lyric(lyric, delay, speed):
 
 def sing_song():
     lyrics = [
-        ("Kau-kau-kau tak pernah katakan apa kurangnya ku untukmu", 0.08),
-        ("Namun, ku tak sebanding meskipun aku di sampingmu", 0.08),
-        ("Dan kau masih cinta yang lalu, dia pergi, kaumenunggu", 0.08),
-        ("Baik kaupergi, berhenti bebani diriku", 0.08),
-        ("Lihatlah aku, ku menunggumu", 0.08),
-        ("Namun, kau s'lalu pikir masa lalu", 0.08),
-        ("Lihatlah aku, ku menunggumu", 0.08),
-        ("Namun, kau s'lalu pikir masa lalu", 0.08)
+        ("'Cause you could be the one that I love", 0.08),
+        ("I could be the one that you dream of", 0.08),
+        ("Message in a bottle is all I can do", 0.08),
+        ("Standin' here, hopin' it gets to you", 0.08),
+        ("You could be the one that I keep, and I", 0.08),
+        ("Could be the reason you can't sleep at night", 0.08),
+        ("Message in a bottle is all I can do", 0.08),
+        ("Standin' here, hopin' it gets to you", 0.08)
     ]
     
-    delays = [0.0, 3.5, 7.0, 10.5, 14.0, 17.5, 21.0, 24.5]
+    delays = [0.0, 3.0, 6.0, 9.0, 12.0, 15.0, 18.0, 21.0]
 
     threads = []
     for i in range(len(lyrics)):
