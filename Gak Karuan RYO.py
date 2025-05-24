@@ -48,8 +48,14 @@ def display_lyrics():
     st.markdown("## 🎤 Lirik:")
     containers = [st.empty() for _ in lyrics]
     start_time = time.time()
+
     for i, (lyric, speed, delay) in enumerate(lyrics):
         time.sleep(max(0, delay - (time.time() - start_time)))
+
+        # Tambahkan jarak sebelum "Sekarang udah malam"
+        if lyric == "Sekarang udah malam":
+            containers[i].markdown("<br>", unsafe_allow_html=True)
+
         typewriter_effect(lyric, containers[i], speed)
 
 # Streamlit UI
