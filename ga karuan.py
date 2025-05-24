@@ -4,27 +4,34 @@ import base64
 import os
 import uuid
 
-# Lokasi file mp3
 AUDIO_FILE = os.path.join("songs", "gak karuan.mp3")
 
-# Buat ID unik agar autoplay hanya jalan saat tombol ditekan atau pertama kali load
 def get_audio_html(file_path, autoplay=False):
     with open(file_path, "rb") as f:
         data = f.read()
         b64 = base64.b64encode(data).decode()
-        audio_id = f"audio_{uuid.uuid4().hex}"
+        audio_id = "audioPlayer"
         auto_attr = "autoplay" if autoplay else ""
         return f"""
         <audio id="{audio_id}" controls {auto_attr}>
             <source src="data:audio/mp3;base64,{b64}" type="audio/mp3">
         </audio>
-        <script>
-        var audio = document.getElementById("{audio_id}");
-        audio.currentTime = 0;
-        </script>
         """
 
-# Efek ketikan per karakter
+def inject_audio_control_script():
+    return """
+    <script>
+    function replayAudio() {
+        var audio = document.getElementById("audioPlayer");
+        if (audio) {
+            audio.pause();
+            audio.currentTime = 0;
+            audio.play();
+        }
+    }
+    </script>
+    """
+
 def typewriter_effect(text, container, speed=0.05):
     typed = ""
     for char in text:
@@ -32,7 +39,6 @@ def typewriter_effect(text, container, speed=0.05):
         container.markdown(f"<p style='font-size:22px; font-weight:500'>{typed}</p>", unsafe_allow_html=True)
         time.sleep(speed)
 
-# Fungsi tampilkan semua lirik
 def display_lyrics():
     lyrics = [
         ("Lama-lama bosan tiap malam telfonan", 0.08, 0.3),
@@ -54,18 +60,18 @@ def display_lyrics():
         time.sleep(max(0, delay - (time.time() - start_time)))
         typewriter_effect(lyric, containers[i], speed)
 
-# UI
+# UI setup
 st.set_page_config(page_title="Lirik Gak Karuan", layout="centered", initial_sidebar_state="collapsed")
 st.title("🎶 Lirik Lagu: Gak Karuan")
 
 if os.path.exists(AUDIO_FILE):
-    # Tombol replay manual
-    autoplay = st.button("🔁 Putar Ulang Lagu dan Lirik")
+    st.markdown(get_audio_html(AUDIO_FILE, autoplay=False), unsafe_allow_html=True)
+    st.markdown(inject_audio_control_script(), unsafe_allow_html=True)
 
-    # Tampilkan player dengan autoplay hanya saat awal/replay ditekan
-    st.markdown(get_audio_html(AUDIO_FILE, autoplay=autoplay), unsafe_allow_html=True)
+    # Tombol untuk play ulang audio + lirik
+    if st.button("🔁 Putar Ulang Lagu dan Lirik"):
+        st.experimental_rerun()
 
-    # Mulai tampilkan lirik langsung
     display_lyrics()
 else:
     st.warning("File lagu tidak ditemukan di folder 'songs/'. Harap upload 'gak karuan.mp3'.")
