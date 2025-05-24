@@ -33,8 +33,8 @@ def display_lyrics():
     
     placeholder = st.empty()
     for lyric, speed, delay in lyrics:
-        # Tunggu sampai waktu lirik sesuai delay
-        time.sleep(delay - (time.time() - start_time))
+        sleep_time = max(0, delay - (time.time() - start_time))  # ✅ fix error
+        time.sleep(sleep_time)
         animated_text = ""
         for char in lyric:
             animated_text += char
