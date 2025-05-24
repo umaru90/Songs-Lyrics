@@ -36,13 +36,13 @@ def display_lyrics():
     lyrics = [
         ("Lama-lama bosan tiap malam telfonan", 0.08, 0.3),
         ("Aduh-aduh kapan kita ketemuan", 0.09, 4.0),
-        ("Lama-lama makin lama makin sayang", 0.08, 8.0),
+        ("Lama-lama makin lama makin sayang", 0.08, 7.5),
         ("Kok jadi gini rasanya aku gak karuan", 0.09, 10.0),
         ("", 0.5, 14.0),
-        ("Sekarang udah malam", 0.15, 15.0),
-        ("Masih sama seperti kemaren", 0.09, 18.5),
-        ("Kamu dan aku udah saling ngerti", 0.08, 22.5),
-        ("Ku tak mau lama-lama", 0.12, 26.0)
+        ("Sekarang udah malam", 0.15, 14.0),
+        ("Masih sama seperti kemaren", 0.09, 17.5),
+        ("Kamu dan aku udah saling ngerti", 0.08, 21.5),
+        ("Ku tak mau lama-lama", 0.12, 25.0)
     ]
 
     st.markdown("## 🎤 Lirik:")
