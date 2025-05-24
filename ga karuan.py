@@ -54,7 +54,7 @@ def display_lyrics():
 
 # Streamlit UI
 st.set_page_config(page_title="Lirik Gak Karuan", layout="centered")
-st.title("🎶 Lirik Lagu: Gak Karuan")
+st.title("🎶 Gak Karuan - RYO 🎶")
 
 if os.path.exists(AUDIO_FILE):
     st.markdown(get_audio_html(), unsafe_allow_html=True)
