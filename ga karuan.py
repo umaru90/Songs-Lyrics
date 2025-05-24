@@ -3,10 +3,10 @@ import streamlit as st
 import base64
 import os
 
-# Lokasi file mp3 di folder songs
+# Lokasi file mp3
 AUDIO_FILE = os.path.join("songs", "gak karuan.mp3")
 
-# Fungsi untuk meng-embed audio ke dalam Streamlit
+# Fungsi embed audio autoplay
 def get_audio_html(file_path):
     with open(file_path, "rb") as f:
         data = f.read()
@@ -17,7 +17,15 @@ def get_audio_html(file_path):
         </audio>
         """
 
-# Fungsi menampilkan lirik secara bertahap (semua ditampilkan, bukan overwrite)
+# Efek ketik animasi (karakter demi karakter)
+def typewriter_effect(text, container, speed=0.05):
+    typed = ""
+    for char in text:
+        typed += char
+        container.markdown(f"<p style='font-size:22px; font-weight:500'>{typed}</p>", unsafe_allow_html=True)
+        time.sleep(speed)
+
+# Fungsi tampilkan semua lirik dengan efek ketik
 def display_lyrics():
     lyrics = [
         ("Lama-lama bosan tiap malam telfonan", 0.08, 0.3),
@@ -30,21 +38,23 @@ def display_lyrics():
         ("Kamu dan aku udah saling ngerti", 0.08, 22.5),
         ("Ku tak mau lama-lama", 0.12, 26.0)
     ]
-    
+
     st.markdown("## 🎤 Lirik:")
-    container = st.container()
+    lyric_containers = []
+    for _ in lyrics:
+        lyric_containers.append(st.empty())
+
     start_time = time.time()
 
-    for lyric, speed, delay in lyrics:
+    for i, (lyric, speed, delay) in enumerate(lyrics):
         sleep_time = max(0, delay - (time.time() - start_time))
         time.sleep(sleep_time)
-        container.markdown(f"<p style='font-size:22px; font-weight:500'>{lyric}</p>", unsafe_allow_html=True)
+        typewriter_effect(lyric, lyric_containers[i], speed)
 
-# Streamlit UI
+# UI utama
 st.set_page_config(page_title="Lirik Gak Karuan", layout="centered", initial_sidebar_state="collapsed")
 st.title("🎶 Gak Karuan - RYO 🎶")
 
-# Tampilkan player
 if os.path.exists(AUDIO_FILE):
     st.markdown(get_audio_html(AUDIO_FILE), unsafe_allow_html=True)
     display_lyrics()
