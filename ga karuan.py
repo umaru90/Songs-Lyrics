@@ -17,7 +17,7 @@ def get_audio_html(file_path):
         </audio>
         """
 
-# Fungsi menampilkan lirik dengan animasi ketik
+# Fungsi menampilkan lirik secara bertahap (semua ditampilkan, bukan overwrite)
 def display_lyrics():
     lyrics = [
         ("Lama-lama bosan tiap malam telfonan", 0.08, 0.3),
@@ -31,23 +31,22 @@ def display_lyrics():
         ("Ku tak mau lama-lama", 0.12, 26.0)
     ]
     
-    placeholder = st.empty()
+    st.markdown("## 🎤 Lirik:")
+    container = st.container()
+    start_time = time.time()
+
     for lyric, speed, delay in lyrics:
-        sleep_time = max(0, delay - (time.time() - start_time))  # ✅ fix error
+        sleep_time = max(0, delay - (time.time() - start_time))
         time.sleep(sleep_time)
-        animated_text = ""
-        for char in lyric:
-            animated_text += char
-            placeholder.markdown(f"### {animated_text}")
-            time.sleep(speed)
+        container.markdown(f"<p style='font-size:22px; font-weight:500'>{lyric}</p>", unsafe_allow_html=True)
 
 # Streamlit UI
-st.title("🎶 Lirik Lagu: Gak Karuan")
+st.set_page_config(page_title="Lirik Gak Karuan", layout="centered", initial_sidebar_state="collapsed")
+st.title("🎶 Gak Karuan - RYO 🎶")
+
+# Tampilkan player
 if os.path.exists(AUDIO_FILE):
     st.markdown(get_audio_html(AUDIO_FILE), unsafe_allow_html=True)
+    display_lyrics()
 else:
     st.warning("File lagu tidak ditemukan di folder 'songs/'. Harap upload 'gak karuan.mp3'.")
-
-if st.button("Mulai Tampilkan Lirik"):
-    start_time = time.time()
-    display_lyrics()
