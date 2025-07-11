@@ -11,7 +11,7 @@ def get_audio_html():
         data = f.read()
         b64 = base64.b64encode(data).decode()
         return f"""
-        <audio id="audioPlayer" controls>
+        <audio id="audioPlayer" controls autoplay>
             <source src="data:audio/mp3;base64,{b64}" type="audio/mp3">
         </audio>
         <script>
@@ -51,7 +51,7 @@ def display_lyrics():
         ("Sekeras batu 🪨😤", 0.08, 23.7)
     ]
 
-    st.markdown("## 🎤 Lirik:")
+    st.markdown("## 🎤 Lirik:") 
     containers = [st.empty() for _ in lyrics]
     start_time = time.time()
 
@@ -65,10 +65,10 @@ st.title("🎶 Calon Mantu Terbaik Mamamu 🎶")
 
 # Cek file dan tampilkan UI
 if os.path.exists(AUDIO_FILE):
+    # Menampilkan audio player dengan autoplay
     st.markdown(get_audio_html(), unsafe_allow_html=True)
 
-    if st.button("▶ Mulai"):
-        st.markdown("<script>playAudio()</script>", unsafe_allow_html=True)
-        display_lyrics()
+    # Menampilkan lirik saat audio dimulai
+    display_lyrics()
 else:
     st.warning("File 'calon mantu terbaik mamamu.mp3' belum ditemukan di folder 'songs/'.")
