@@ -5,7 +5,7 @@ import os
 
 AUDIO_FILE = os.path.join("songs", "calon mantu terbaik mamamu.mp3")
 
-# Audio base64 embed
+# Fungsi untuk meng-embed audio player
 def get_audio_html():
     with open(AUDIO_FILE, "rb") as f:
         data = f.read()
@@ -23,17 +23,20 @@ def get_audio_html():
         </script>
         """
 
-# Efek ketik
+# Efek ketikan karakter per karakter
 def typewriter_effect(text, container, speed=0.05):
     typed = ""
     for char in text:
         typed += char
-        container.markdown(f"<p style='font-size:22px; font-weight:500'>{typed}</p>", unsafe_allow_html=True)
+        container.markdown(
+            f"<p style='font-size:22px; font-weight:500'>{typed}</p>",
+            unsafe_allow_html=True
+        )
         time.sleep(speed)
 
-# Fungsi tampilkan lirik
+# Menampilkan lirik dengan animasi ketikan
 def display_lyrics():
-        lyrics = [
+    lyrics = [
         ("But do you feel it too? 🤔", 0.07, 0.5),
         ("Like the way I do? 💭", 0.07, 2.8),
         ("Aku calon mantu terbaik mamamu 👨‍💼💍", 0.06, 4.9),
@@ -56,10 +59,11 @@ def display_lyrics():
         time.sleep(max(0, delay - (time.time() - start_time)))
         typewriter_effect(lyric, containers[i], speed)
 
-# Streamlit UI
+# Konfigurasi halaman
 st.set_page_config(page_title="Lirik Calon Mantu", layout="centered")
 st.title("🎶 Calon Mantu Terbaik Mamamu 🎶")
 
+# Cek file dan tampilkan UI
 if os.path.exists(AUDIO_FILE):
     st.markdown(get_audio_html(), unsafe_allow_html=True)
 
