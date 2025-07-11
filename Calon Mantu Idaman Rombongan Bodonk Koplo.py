@@ -33,19 +33,19 @@ def typewriter_effect(text, container, speed=0.05):
 
 # Fungsi tampilkan lirik
 def display_lyrics():
-    lyrics = [
-        ("But do you feel it too?", 0.07, 0.5),
-        ("Like the way I do?", 0.07, 2.8),
-        ("Aku calon mantu terbaik mamamu", 0.06, 4.9),
-        ("Walaupun hatimu", 0.08, 7.7),
-        ("Sekeras batu", 0.08, 9.5),
-        ("Still got you on mind", 0.06, 11.2),
-        ("No matter what you do", 0.06, 13.2),
-        ("But do you feel it too?", 0.07, 15.1),
-        ("Like the way I do?", 0.07, 17.2),
-        ("Aku calon mantu terbaik mamamu", 0.06, 19.1),
-        ("Walaupun hatimu", 0.08, 21.9),
-        ("Sekeras batu", 0.08, 23.7)
+        lyrics = [
+        ("But do you feel it too? 🤔", 0.07, 0.5),
+        ("Like the way I do? 💭", 0.07, 2.8),
+        ("Aku calon mantu terbaik mamamu 👨‍💼💍", 0.06, 4.9),
+        ("Walaupun hatimu ❤️‍🔥", 0.08, 7.7),
+        ("Sekeras batu 🪨", 0.08, 9.5),
+        ("Still got you on mind 🧠❤️", 0.06, 11.2),
+        ("No matter what you do 🙅‍♂️✅", 0.06, 13.2),
+        ("But do you feel it too? 🤔", 0.07, 15.1),
+        ("Like the way I do? 💭", 0.07, 17.2),
+        ("Aku calon mantu terbaik mamamu 💍👔", 0.06, 19.1),
+        ("Walaupun hatimu 💘🧱", 0.08, 21.9),
+        ("Sekeras batu 🪨😤", 0.08, 23.7)
     ]
 
     st.markdown("## 🎤 Lirik:")
